@@ -1,0 +1,46 @@
+{
+  "name": "modern-tictactoe",
+  "version": "1.0.0",
+  "description": "A beautiful, modern tic-tac-toe game with neon effects, sound, and smooth animations",
+  "main": "index.html",
+  "scripts": {
+    "start": "echo 'Open index.html in your browser to play the game!'",
+    "serve": "python -m http.server 8000 || python3 -m http.server 8000",
+    "deploy": "echo 'Ready for GitHub Pages deployment!'"
+  },
+  "keywords": [
+    "tic-tac-toe",
+    "game",
+    "neon",
+    "javascript",
+    "html5",
+    "css3",
+    "web-game",
+    "animations",
+    "sound-effects",
+    "responsive",
+    "modern-ui",
+    "glass-morphism"
+  ],
+  "author": {
+    "name": "RajaOjha98",
+    "url": "https://github.com/RajaOjha98"
+  },
+  "license": "MIT",
+  "homepage": "https://rajaojha98.github.io/TicTacToeGame",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RajaOjha98/TicTacToeGame.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RajaOjha98/TicTacToeGame/issues"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+} 

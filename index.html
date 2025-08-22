@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+    Modern Tic-Tac-Toe Game
+    
+    A beautiful, modern tic-tac-toe game featuring:
+    - Stunning neon effects and animations
+    - Dynamic sound effects
+    - Real-time score tracking
+    - Responsive design for all devices
+    
+    Built with pure HTML5, CSS3, and JavaScript
+    Author: RajaOjha98
+    License: MIT
+    Repository: https://github.com/RajaOjha98/TicTacToeGame
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modern Tic-Tac-Toe game with neon effects, sound, and smooth animations">
+    <meta name="keywords" content="tic-tac-toe, game, neon, modern, javascript, html5, css3">
+    <meta name="author" content="RajaOjha98">
+    
+    <title>Modern Tic-Tac-Toe - Play Online</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="game-title">Tic-Tac-Toe</h1>
+            <div class="game-info">
+                <div class="current-player">
+                    <span class="player-label">Current Player:</span>
+                    <span class="player-indicator" id="currentPlayer">X</span>
+                </div>
+                <div class="score-board">
+                    <div class="score">
+                        <span class="score-label">Player X:</span>
+                        <span class="score-value" id="scoreX">0</span>
+                    </div>
+                    <div class="score">
+                        <span class="score-label">Player O:</span>
+                        <span class="score-value" id="scoreO">0</span>
+                    </div>
+                    <div class="score">
+                        <span class="score-label">Draws:</span>
+                        <span class="score-value" id="scoreDraw">0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="game-container">
+                <div class="game-board-section">
+                    <div class="game-board" id="gameBoard">
+                        <div class="cell" data-index="0"></div>
+                        <div class="cell" data-index="1"></div>
+                        <div class="cell" data-index="2"></div>
+                        <div class="cell" data-index="3"></div>
+                        <div class="cell" data-index="4"></div>
+                        <div class="cell" data-index="5"></div>
+                        <div class="cell" data-index="6"></div>
+                        <div class="cell" data-index="7"></div>
+                        <div class="cell" data-index="8"></div>
+                    </div>
+
+                    <div class="game-controls">
+                        <button class="btn btn-primary" id="resetGame">New Game</button>
+                        <button class="btn btn-secondary" id="resetScore">Reset Score</button>
+                        <button class="btn btn-sound" id="toggleSound">🔊 Sound ON</button>
+                    </div>
+                </div>
+
+                <div class="game-status-panel">
+                    <div class="status-card">
+                        <h3 class="status-title">Game Status</h3>
+                        <div class="status-content" id="gameStatus">
+                            <p class="status-message">Let's play! X goes first.</p>
+                        </div>
+                        <div class="win-announcement" id="winAnnouncement">
+                            <!-- Win/Draw messages will appear here -->
+                        </div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <h3 class="stats-title">Game Statistics</h3>
+                        <div class="stats-content">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Games:</span>
+                                <span class="stat-value" id="totalGames">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">X Win Rate:</span>
+                                <span class="stat-value" id="xWinRate">0%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">O Win Rate:</span>
+                                <span class="stat-value" id="oWinRate">0%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Draw Rate:</span>
+                                <span class="stat-value" id="drawRate">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

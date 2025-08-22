@@ -1,0 +1,735 @@
+/*
+ * Modern Tic-Tac-Toe Game - CSS Styles
+ * 
+ * Features included:
+ * - Glass-morphism design with backdrop filters
+ * - Neon glow effects for game elements
+ * - Smooth CSS animations and transitions
+ * - Responsive design for all screen sizes
+ * - Custom strikethrough line animations
+ * 
+ * Author: RajaOjha98
+ * License: MIT
+ * Repository: https://github.com/RajaOjha98/TicTacToeGame
+ */
+
+/* ========================================
+   RESET AND BASE STYLES
+   ======================================== */
+
+/* CSS Reset for consistent cross-browser styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.game-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1.5rem;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.current-player {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.player-label {
+    color: white;
+    font-weight: 500;
+}
+
+.player-indicator {
+    background: linear-gradient(45deg, #ff6b6b, #ffa726);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+.score-board {
+    display: flex;
+    gap: 1rem;
+}
+
+.score {
+    text-align: center;
+    color: white;
+}
+
+.score-label {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.score-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 0.2rem;
+}
+
+/* ========================================
+   MAIN GAME LAYOUT
+   ======================================== */
+
+/* Main Game Area */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Game Container */
+.game-container {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Game Board Section */
+.game-board-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 400px;
+}
+
+/* Game Board */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    animation: fadeInScale 0.8s ease-out 0.4s both;
+    position: relative;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cell:hover:not(.taken) {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.cell.taken {
+    cursor: not-allowed;
+}
+
+.cell.x {
+    color: #ff6b6b;
+    animation: bounceIn 0.6s ease-out;
+    text-shadow: 
+        0 0 5px #ff6b6b,
+        0 0 10px #ff6b6b,
+        0 0 15px #ff6b6b,
+        0 0 20px #ff6b6b,
+        0 0 30px #ff0040;
+}
+
+.cell.o {
+    color: #4ecdc4;
+    animation: bounceIn 0.6s ease-out;
+    text-shadow: 
+        0 0 5px #4ecdc4,
+        0 0 10px #4ecdc4,
+        0 0 15px #4ecdc4,
+        0 0 20px #4ecdc4,
+        0 0 30px #00ffff;
+}
+
+.cell.winning {
+    background: linear-gradient(45deg, #ffd700, #ffed4e) !important;
+    animation: winningCell 1s ease-in-out infinite alternate;
+}
+
+/* Neon Strikethrough Line */
+.strike-line {
+    position: absolute;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        #00ffff 20%, 
+        #ffffff 50%, 
+        #00ffff 80%, 
+        transparent 100%);
+    box-shadow: 
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 30px #00ffff,
+        0 0 40px #00ffff,
+        0 0 50px #00ffff;
+    border-radius: 3px;
+    transform-origin: left center;
+    z-index: 100;
+    animation: strikeThrough 1.2s ease-out forwards, neonPulse 0.8s ease-in-out 1.2s infinite alternate;
+}
+
+.strike-line.horizontal {
+    height: 6px;
+    width: 0;
+}
+
+.strike-line.vertical {
+    width: 6px;
+    height: 0;
+    background: linear-gradient(180deg, 
+        transparent 0%, 
+        #00ffff 20%, 
+        #ffffff 50%, 
+        #00ffff 80%, 
+        transparent 100%);
+}
+
+.strike-line.diagonal {
+    height: 6px;
+    width: 0;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        #ff0080 20%, 
+        #ffffff 50%, 
+        #ff0080 80%, 
+        transparent 100%);
+    box-shadow: 
+        0 0 10px #ff0080,
+        0 0 20px #ff0080,
+        0 0 30px #ff0080,
+        0 0 40px #ff0080,
+        0 0 50px #ff0080;
+    transform-origin: left center;
+    animation: strikeThroughDiagonal 1.2s ease-out forwards, neonPulseDiagonal 0.8s ease-in-out 1.2s infinite alternate;
+    opacity: 0;
+}
+
+.strike-line.anti-diagonal {
+    height: 6px;
+    width: 0;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        #ff4000 20%, 
+        #ffffff 50%, 
+        #ff4000 80%, 
+        transparent 100%);
+    box-shadow: 
+        0 0 10px #ff4000,
+        0 0 20px #ff4000,
+        0 0 30px #ff4000,
+        0 0 40px #ff4000,
+        0 0 50px #ff4000;
+    transform-origin: left center;
+    animation: strikeThroughDiagonal 1.2s ease-out forwards, neonPulseDiagonal 0.8s ease-in-out 1.2s infinite alternate;
+    opacity: 0;
+}
+
+/* Game Controls */
+.game-controls {
+    display: flex;
+    gap: 1rem;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+    justify-content: center;
+}
+
+.btn {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #ff6b6b, #ffa726);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-sound {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    color: white;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-sound:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+}
+
+.btn-sound.disabled {
+    background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+    box-shadow: 0 4px 15px rgba(149, 165, 166, 0.3);
+}
+
+.btn-sound.disabled:hover {
+    box-shadow: 0 6px 20px rgba(149, 165, 166, 0.4);
+}
+
+/* Game Status Panel */
+.game-status-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 400px;
+    animation: fadeInRight 0.8s ease-out 0.6s both;
+    align-self: flex-start;
+}
+
+.status-card, .stats-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.status-title, .stats-title {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.status-content {
+    text-align: center;
+}
+
+.status-message {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #333;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 0;
+}
+
+.win-announcement {
+    margin-top: 0.5rem;
+    text-align: center;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.win-message {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #333;
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    animation: winMessagePulse 1s ease-in-out infinite alternate;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.draw-message {
+    background: linear-gradient(45deg, #95a5a6, #bdc3c7);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 6px 20px rgba(149, 165, 166, 0.4);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.stats-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item:last-child {
+    border-bottom: none;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+.stat-value {
+    color: white;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* Removed Game Rules Section */
+
+/* Removed Modal Styles - Using Status Panel Instead */
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes winningCell {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Removed modalSlideIn animation - no longer needed */
+
+@keyframes strikeThrough {
+    0% {
+        width: 0;
+        height: 0;
+    }
+    100% {
+        width: var(--line-width);
+        height: var(--line-height);
+    }
+}
+
+@keyframes strikeThroughDiagonal {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        width: var(--line-width);
+        opacity: 1;
+    }
+}
+
+@keyframes neonPulse {
+    0% {
+        opacity: 0.8;
+        filter: brightness(1);
+    }
+    100% {
+        opacity: 1;
+        filter: brightness(1.3);
+    }
+}
+
+@keyframes neonPulseDiagonal {
+    0% {
+        opacity: 0.8;
+        filter: brightness(1);
+    }
+    100% {
+        opacity: 1;
+        filter: brightness(1.3);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes winMessagePulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    }
+    100% {
+        transform: scale(1.02);
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .game-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    .game-board-section {
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .game-status-panel {
+        width: 100%;
+        max-width: 400px;
+        flex-direction: row;
+        gap: 1rem;
+    }
+    
+    .status-card, .stats-card {
+        flex: 1;
+        width: 100%;
+        max-width: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .game-title {
+        font-size: 2.5rem;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .score-board {
+        justify-content: center;
+    }
+    
+    .cell {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+    
+    .game-board {
+        padding: 15px;
+    }
+    
+    .game-container {
+        gap: 1.5rem;
+    }
+    
+    .game-board-section {
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .game-status-panel {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .game-controls {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .status-card, .stats-card {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-title {
+        font-size: 2rem;
+    }
+    
+    .cell {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+    }
+    
+    .modal-content {
+        padding: 1.5rem;
+    }
+    
+    .modal-buttons {
+        flex-direction: column;
+    }
+} 
